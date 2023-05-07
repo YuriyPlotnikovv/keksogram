@@ -6,7 +6,7 @@ const SOME_MESSAGE = [
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
 const SOME_NAME = [
@@ -16,7 +16,15 @@ const SOME_NAME = [
   'Юрий',
   'Софья',
   'Андрей',
-  'Анна'
+  'Анна',
+  'Ульяна',
+  'Игорь',
+  'Макс',
+  'Ольга',
+  'Алла',
+  'Николай',
+  'Дмитрий',
+  'Екатерина',
 ];
 
 const SOME_DESCRIPTION = [
@@ -27,8 +35,10 @@ const SOME_DESCRIPTION = [
   'Люблю фотографировать',
   'Нужно больше фотографий!!!',
   'Люблю эту фотографию)',
-  'Как вам моя фотография?'
-]
+  'Как вам моя фотография?',
+];
+
+const SOME_PEOPLE_COUNT = 25;
 
 // Получение рандомного числа
 
@@ -45,21 +55,6 @@ const getLength = function (string, maxLength) {
   return false
 };
 
-// Количество объектов
-
-const SOME_PEOPLE_COUNT = 25;
-
-// Массив неповторяющихся чисел
-
-const someSet = function (min, max, length) {
-  let set = new Set();
-  while (set.size < length) set.add(getRandom(min, max));
-  return set;
-}
-
-const uniqueCommentId = Array.from(someSet(1, 25, 25))
-const uniquePhotoId = Array.from(someSet(1, 25, 25))
-
 // Генерация рандомных элементов
 
 const getRandomArrayElement = (elements) => {
@@ -68,9 +63,9 @@ const getRandomArrayElement = (elements) => {
 
 // Создание комментария
 
-const createComment = () => {
+const createComment = (index) => {
   return {
-    id: getRandomArrayElement(uniqueCommentId),
+    id: index,
     avatar: 'img/avatar-' + getRandom(1, 6) + '.svg',
     message: getRandomArrayElement(SOME_MESSAGE),
     name: getRandomArrayElement(SOME_NAME)
@@ -79,17 +74,16 @@ const createComment = () => {
 
 // Создание объекта
 
-const createObject = () => {
+const createObject = (index) => {
   return {
-    id: getRandomArrayElement(uniquePhotoId),
-    url: 'photos/' + getRandom(1, SOME_PEOPLE_COUNT) + '.jpg',
+    id: index,
+    url: 'photos/' + index + '.jpg',
     description: getRandomArrayElement(SOME_DESCRIPTION),
     likes: getRandom(15, 200),
-    comments: Array.from({ length: getRandom(1, 15) }, createComment)
+    comments: Array.from({ length: getRandom(1, 15) }, (_, index) => createComment(index += 1))
   };
 };
-
-const someObjects = Array.from({ length: 25 }, createObject);
+const someObjects = Array.from({ length: 25 }, (_, index) => createObject(index += 1));
 
 // Выведение в консоль итога
 
