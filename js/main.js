@@ -1,4 +1,4 @@
-import { someObjects } from "./modules/creation.js";
+import { someObjects } from "./modules/util.js";
 
 // Выведение в консоль итога
 
