@@ -1,5 +1,2 @@
-import { someObjects } from "./modules/util.js";
-
-// Выведение в консоль итога
-
-console.log(someObjects);
+import "./modules/users-pictures.js";
+import "./modules/click-handler.js"

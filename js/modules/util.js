@@ -42,6 +42,7 @@ const createComment = (index) => {
     name: getRandomArrayElement(SOME_NAME)
   };
 };
+const sameComments = () => Array.from({ length: getRandom(1, 15) }, (_, index) => createComment(index++));
 
 // Создание объекта
 
@@ -51,9 +52,9 @@ const createObject = (index) => {
     url: 'photos/' + someArray[index] + '.jpg',
     description: getRandomArrayElement(SOME_DESCRIPTION),
     likes: getRandom(15, 200),
-    comments: Array.from({ length: getRandom(1, 15) }, (_, index) => createComment(index++))
+    comments: sameComments()
   };
 };
-const someObjects = Array.from({ length: SOME_PEOPLE_COUNT }, (_, index) => createObject(index++));
+const someObjects = () => Array.from({ length: SOME_PEOPLE_COUNT }, (_, index) => createObject(index++));
 
 export { someObjects };
