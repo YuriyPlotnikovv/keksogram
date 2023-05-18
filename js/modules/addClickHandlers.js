@@ -1,3 +1,5 @@
+import { isKeyEscape } from "./util.js";
+
 const thumbnails = document.querySelectorAll('.picture');
 const modal = document.querySelector('.big-picture');
 const closeButton = document.querySelector('.big-picture__cancel')
@@ -27,7 +29,7 @@ const addModalClickHandler = function () {
   });
 
   document.addEventListener('keydown', function (evt) {
-    if (evt.key === 'Escape') {
+    if (isKeyEscape) {
       modal.classList.add('hidden');
       modalOpened.classList.remove('modal-open');
     }

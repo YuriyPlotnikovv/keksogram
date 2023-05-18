@@ -17,6 +17,13 @@ const getLength = (string, maxLength) => {
 
 export { getLength };
 
+// Проверка нажатой клавиши
+
+const isKeyEscape = (evt) => {
+  return evt.key === 'Escape';
+}
+export { isKeyEscape };
+
 // Генерация рандомных элементов
 
 const getRandomArrayElement = (elements) => {
