@@ -3,6 +3,8 @@ const bigImage = bigImageContainer.querySelector('.big-picture__img');
 const imageCapture = bigImageContainer.querySelector('.social__header');
 const commentsContainer = bigImageContainer.querySelector('.social__comments');
 
+// Добавление данных для больших фото
+
 const addBigPhotoData = (url, comments, likes, description) => {
   bigImage.querySelector('img').src = url;
     imageCapture.querySelector('.social__caption').textContent = description;

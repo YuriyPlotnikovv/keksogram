@@ -8,6 +8,8 @@ const BigImageFragment = document.createDocumentFragment();
 
 const samePictures = someObjects();
 
+// Добавление изображений на страницу
+
 samePictures.forEach(({ url, comments, likes, description }) => {
   const pictureElement = picturesTemplate.cloneNode(true);
   addThumbnailsData(pictureElement, url, comments, likes, description);
