@@ -19,6 +19,6 @@ samePictures.forEach(({ url, comments, likes, description }) => {
     addBigPhotoData(url, comments, likes, description);
   });
   BigImageFragment.appendChild(pictureElement);
-});
+})
 
 picturesContainer.appendChild(BigImageFragment);

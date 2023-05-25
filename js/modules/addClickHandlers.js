@@ -1,6 +1,6 @@
 import { isKeyEscape } from "./util.js";
 
-const thumbnails = document.querySelectorAll('.picture');
+const thumbnailsContainer = document.querySelector('.pictures');
 const modal = document.querySelector('.big-picture');
 const closeButton = document.querySelector('.big-picture__cancel')
 const modalOpened = document.querySelector('body');
@@ -23,21 +23,14 @@ const openModal = () => {
   document.addEventListener('keydown', closeEscModal);
 }
 
-const openModalClickHandler = function (thumbnail) {
-  thumbnail.addEventListener('click', function (evt) {
+const openModalClickHandler = function () {
+  thumbnailsContainer.addEventListener('click', function (evt) {
     evt.preventDefault();
     openModal();
   });
-};
-
-const addThumbnailsClickHandler = () =>
-{
-  for (let i = 0; i < thumbnails.length; i++) {
-    openModalClickHandler(thumbnails[i]);
-  };
 }
 
-addThumbnailsClickHandler();
+openModalClickHandler();
 
 // Добавление обработчика на закрытие
 
