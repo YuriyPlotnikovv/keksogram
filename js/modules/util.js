@@ -1,5 +1,5 @@
 import { SOME_MESSAGE, SOME_NAME, SOME_DESCRIPTION, SOME_PEOPLE_COUNT } from "./data.js"
-
+import { commentField, hashTagsField } from "./addFormValidation.js";
 // Получение рандомного числа
 
 const getRandom = (min, max) => {
@@ -23,6 +23,13 @@ const isKeyEscape = (evt) => {
   return evt.key === 'Escape';
 }
 export { isKeyEscape };
+
+// Проверка активного поля
+
+const isFieldFocused = () =>
+document.activeElement === hashTagsField ||
+document.activeElement === commentField;
+export { isFieldFocused };
 
 // Генерация рандомных элементов
 

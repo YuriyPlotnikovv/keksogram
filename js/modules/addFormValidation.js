@@ -1,41 +1,27 @@
 const formField = document.querySelector('.img-upload__form');
 const hashTagsField = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description')
-const submitButton = document.querySelector('.img-upload__submit');
+export { commentField, hashTagsField };
 
 // Проверка валидности хэштегов
+  
+const PATTERN = /^#[A-Za-zА-Яа-яЁё0-9]{2,19}$/;
+const MAX_TAGS_COUNT = 5;
+
+const hasValidTag = (string) => !PATTERN.test(string.slice(1));
+const hasValidCountTags = (tags) => tags.length <= MAX_TAGS_COUNT;
+const hasUniqueTags = (tags) => {
+  const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
+  return lowerCaseTags.length === new Set(lowerCaseTags).size;
+}
 
 const isValidTags = (value) => {
-  const hashTagsArray = value.trim().split(' ');
-  const pattern = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
-
-  function isTrue(element) {
-    return pattern.test(element);
-  }
-  if (hashTagsArray.length > 5) {
-    alert('Не более 5 хэштегов')
-  }
-  return hashTagsArray.every(isTrue);
+  const tags = value
+    .trim()
+    .split(' ')
+    .filter((tag) => tag.trim().length);
+  return hasValidCountTags(tags) && hasUniqueTags(tags) && tags.every(hasValidTag);
 };
-
-// Отключение ESC при фокусе
-
-const escStopPropagation = (evt) => {
-  if (evt.key === "Escape") {
-    evt.stopPropagation()
-  }
-}
-
-const addFocusHandler = (element) => {
-  element.onfocus = () => {
-    element.addEventListener('keydown', escStopPropagation)
-  }
-  element.onblur = () => {
-    element.removeEventListener('keydown', escStopPropagation)
-  }
-}
-addFocusHandler(hashTagsField);
-addFocusHandler(commentField);
 
 // Добавление дополнительной проверки Pristine
 
@@ -49,9 +35,5 @@ pristine.addValidator(hashTagsField, isValidTags, 'Ошибка ввода хэ�
 
 formField.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  if (pristine.validate() === true) {
-    formField.submit();
-  } else {
-    alert('Ошибка ввода хэштегов')
-  }
-})
+  pristine.validate();
+});

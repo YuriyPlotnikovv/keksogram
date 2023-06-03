@@ -1,16 +1,16 @@
-import { isKeyEscape } from "./util.js";
+import { isKeyEscape, isFieldFocused } from "./util.js";
 
-const uploadButton = document.querySelector('#upload-file');
-const uploadModal = document.querySelector('.img-upload__overlay');
-const closeImgModalButton = document.querySelector('.img-upload__cancel');
 const body = document.querySelector('body');
 const fileField = document.querySelector('.img-upload__form');
-  
+const uploadButton = fileField.querySelector('#upload-file');
+const uploadModal = fileField.querySelector('.img-upload__overlay');
+const closeImgModalButton = fileField.querySelector('.img-upload__cancel');
+
 // Обработчик Esc
 
 const closeEscImg = (evt) => {
-  if (isKeyEscape(evt)) {
-    evt.preventDefault;
+  if (isKeyEscape(evt) && !isFieldFocused()) {
+    evt.preventDefault();
     closeImgModal();
   }
 }
@@ -24,9 +24,12 @@ const openImgModal = () => {
   document.addEventListener('keydown', closeEscImg);
 }
 
-uploadButton.addEventListener('change', function () {
-  openImgModal();
-})
+const openImgClickHandler = () => {
+  uploadButton.addEventListener('click', () => {
+    openImgModal();
+  })
+}
+openImgClickHandler();
 
 // Добавление обработчика закрытия окна
 
@@ -38,7 +41,10 @@ const closeImgModal = () => {
   document.removeEventListener('keydown', closeEscImg);
 }
 
-closeImgModalButton.addEventListener('click', function (evt) {
-  evt.preventDefault();
-  closeImgModal();
-})
+const closeImgClickHandler = () => {
+  closeImgModalButton.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    closeImgModal();
+  })
+}
+closeImgClickHandler();

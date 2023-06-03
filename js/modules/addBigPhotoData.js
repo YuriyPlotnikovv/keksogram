@@ -1,32 +1,118 @@
-const bigImageContainer = document.querySelector('.big-picture');
-const bigImage = bigImageContainer.querySelector('.big-picture__img');
-const imageCapture = bigImageContainer.querySelector('.social__header');
-const commentsContainer = bigImageContainer.querySelector('.social__comments');
+import { isKeyEscape } from "./util.js";
+
+const modal = document.querySelector('.big-picture');
+const bigImage = modal.querySelector('.big-picture__img');
+const imageCapture = modal.querySelector('.social__header');
+const thumbnailsContainer = document.querySelector('.pictures');
+const closeButton = document.querySelector('.big-picture__cancel')
+const modalOpened = document.querySelector('body');
+const commentsContainer = document.querySelector('.social__comments');
+const commentsLoader = document.querySelector('.social__comments-loader');
+const commentsCounter = document.querySelector('.social__comment-count');
+
+const COMMENTS_QUANTITY = 5;
+let commentsShown = 0;
+let commentsArray = [];
+
+// Добавление комментариев
+
+const createComment = ({ avatar, name, message }) => {
+  const comment = document.createElement('li');
+  comment.classList.add('social__comment');
+  comment.innerHTML =
+  `<img class="social__picture"
+  src=""
+  alt=""
+  width="35" height="35">
+  <p class="social__text"></p>`;
+
+  comment.querySelector('.social__picture').src = avatar;
+  comment.querySelector('.social__picture').alt = name;
+  comment.querySelector('.social__text').textContent = message;
+
+  return comment;
+}
+
+const renderComments = () => {
+  commentsShown += COMMENTS_QUANTITY;
+
+  if (commentsShown >= commentsArray.length) {
+    commentsLoader.classList.add('hidden');
+    commentsShown = commentsArray.length;
+  } else {
+    commentsLoader.classList.remove('hidden');
+  }
+
+  const fragment = document.createDocumentFragment();
+  for (let i = 0; i < commentsShown; i++) {
+    const commentElement = createComment(commentsArray[i]);
+    fragment.append(commentElement);
+  };
+
+  commentsContainer.innerHTML = '';
+  commentsContainer.append(fragment);
+  commentsCounter.innerHTML = `${commentsShown} из <span class="comments-count">${commentsArray.length}</span> комментариев`;
+}
+
+// Обработчик на Esc
+
+const closeEscModal = (evt) => {
+  if (isKeyEscape(evt)) {
+    evt.preventDefault();
+    closeModal();
+  };
+}
+
+// Добаление обработчика на открытие
+
+const openModal = () => {
+  modal.classList.remove('hidden');
+  modalOpened.classList.add('modal-open');
+
+  document.addEventListener('keydown', closeEscModal);
+}
+
+const openModalClickHandler = function () {
+  thumbnailsContainer.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    openModal();
+  });
+}
+
+openModalClickHandler();
+
+// Добавление обработчика на закрытие
+
+const closeModal = () => {
+  modal.classList.add('hidden');
+  modalOpened.classList.remove('modal-open');
+
+  document.removeEventListener('keydown', closeEscModal);
+  commentsShown = 0;
+}
+
+const addModalClickHandler = function () {
+  closeButton.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    closeModal();
+  });
+}
+
+addModalClickHandler();
 
 // Добавление данных для больших фото
 
 const addBigPhotoData = (url, comments, likes, description) => {
   bigImage.querySelector('img').src = url;
-    imageCapture.querySelector('.social__caption').textContent = description;
-    imageCapture.querySelector('.likes-count').textContent = likes;
-    bigImageContainer.querySelector('.comments-count').textContent = comments.length;
-    commentsContainer.innerHTML = '';
-    comments.forEach((comment) => {
-      const commentElement = document.createElement('li');
-      commentElement.classList.add('social__comment');
-      commentElement.innerHTML =
-        `<img class="social__picture"
-          src="${comment.avatar}"
-          alt="${comment.name}"
-          width="35" height="35">
-        <p class="social__text">${comment.message}</p>`;
-      commentsContainer.appendChild(commentElement);
-    });
+  imageCapture.querySelector('.social__caption').textContent = description;
+  imageCapture.querySelector('.likes-count').textContent = likes;
+  commentsArray = comments;
+  renderComments();
+
 }
 
-export { addBigPhotoData };
+commentsLoader.addEventListener('click', () => {
+  renderComments();
+})
 
-/*В модуле, который отвечает за отрисовку окна с полноразмерным изображением,
-доработайте код по выводу списка комментариев таким образом, чтобы список показывался не полностью,
-а по 5 элементов, и следующие 5 элементов добавлялись бы по нажатию на кнопку «Загрузить ещё».
-Не забудьте реализовать обновление числа показанных комментариев в блоке .social__comment-count. */
+export { addBigPhotoData };
