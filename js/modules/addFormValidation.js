@@ -1,14 +1,15 @@
 const formField = document.querySelector('.img-upload__form');
 const hashTagsField = document.querySelector('.text__hashtags');
-const commentField = document.querySelector('.text__description')
+const commentField = document.querySelector('.text__description');
+
 export { commentField, hashTagsField };
 
 // Проверка валидности хэштегов
-  
+
 const PATTERN = /^#[A-Za-zА-Яа-яЁё0-9]{2,19}$/;
 const MAX_TAGS_COUNT = 5;
 
-const hasValidTag = (string) => !PATTERN.test(string.slice(1));
+const hasValidTag = (string) => PATTERN.test(string.slice());
 const hasValidCountTags = (tags) => tags.length <= MAX_TAGS_COUNT;
 const hasUniqueTags = (tags) => {
   const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
@@ -35,5 +36,8 @@ pristine.addValidator(hashTagsField, isValidTags, 'Ошибка ввода хэ�
 
 formField.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  pristine.validate();
+  const isValidForm = pristine.validate();
+  if (isValidForm == true) {
+    formField.submit();
+  }
 });

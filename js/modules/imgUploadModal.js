@@ -5,7 +5,9 @@ const fileField = document.querySelector('.img-upload__form');
 const uploadButton = fileField.querySelector('#upload-file');
 const uploadModal = fileField.querySelector('.img-upload__overlay');
 const closeImgModalButton = fileField.querySelector('.img-upload__cancel');
+const imgPreview = uploadModal.querySelector('.img-upload__preview').children;
 
+export { uploadModal };
 // Обработчик Esc
 
 const closeEscImg = (evt) => {
@@ -37,6 +39,8 @@ const closeImgModal = () => {
   fileField.reset();
   body.classList.remove('modal-open');
   uploadModal.classList.add('hidden');
+  imgPreview[0].removeAttribute('style');
+  imgPreview[0].removeAttribute('class');
 
   document.removeEventListener('keydown', closeEscImg);
 }
