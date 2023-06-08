@@ -1,3 +1,5 @@
+import { sendData } from "./api.js";
+
 const formField = document.querySelector('.img-upload__form');
 const hashTagsField = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
@@ -34,10 +36,17 @@ const pristine = new Pristine(formField, {
 
 pristine.addValidator(hashTagsField, isValidTags, 'Ошибка ввода хэштегов');
 
-formField.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  const isValidForm = pristine.validate();
-  if (isValidForm == true) {
-    formField.submit();
-  }
-});
+// Отправка формы после проверки
+
+const sendFormData = () => {
+  formField.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const isValidForm = pristine.validate();
+    if (isValidForm) {
+      const formData = new FormData(evt.target);
+      sendData(formData);
+    };
+  });
+};
+
+sendFormData()

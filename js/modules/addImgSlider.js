@@ -1,13 +1,11 @@
-import { uploadModal } from "./imgUploadModal.js";
-
 // Подключение слайдера
 
-const sliderContainer = uploadModal.querySelector('.effect-level');
+const sliderContainer = document.querySelector('.effect-level');
 const sliderElement = sliderContainer.querySelector('.effect-level__slider');
 const sliderValue = sliderContainer.querySelector('.effect-level__value');
 const effectList = document.querySelector('.effects__list');
 const effectRadio = effectList.querySelectorAll('.effects__radio');
-const imgPreview = uploadModal.querySelector('.img-upload__preview').children;
+const imgPreview = document.querySelector('.img-upload__preview').children;
 
 sliderValue.value = 0;
 
@@ -65,7 +63,7 @@ const effectUpdate = (effectNumber, min, max, start, step, effect, filter, ...sy
     imgPreview[0].classList.add('effects__preview--' + effect);
 
   } else {
-    imgPreview[0].removeAttribute('style');
+    imgPreview[0].style.filter = null;
     imgPreview[0].classList.remove('effects__preview--' + effect);
   }
 }
@@ -79,7 +77,8 @@ effectList.addEventListener('change', () => {
     });
     sliderElement.noUiSlider.set(0);
     sliderElement.setAttribute('disabled', true);
-    sliderContainer.setAttribute('hidden', true)
+    sliderContainer.setAttribute('hidden', true);
+    imgPreview[0].style.filter = null;
   } else {
     sliderElement.removeAttribute('disabled');
     sliderContainer.removeAttribute('hidden')

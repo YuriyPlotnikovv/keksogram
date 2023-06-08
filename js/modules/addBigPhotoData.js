@@ -3,7 +3,7 @@ import { isKeyEscape } from "./util.js";
 const modal = document.querySelector('.big-picture');
 const bigImage = modal.querySelector('.big-picture__img');
 const imageCapture = modal.querySelector('.social__header');
-const thumbnailsContainer = document.querySelector('.pictures');
+const thumbnails = document.querySelectorAll('.picture');
 const closeButton = document.querySelector('.big-picture__cancel')
 const modalOpened = document.querySelector('body');
 const commentsContainer = document.querySelector('.social__comments');
@@ -54,14 +54,14 @@ const renderComments = () => {
   commentsCounter.innerHTML = `${commentsShown} из <span class="comments-count">${commentsArray.length}</span> комментариев`;
 }
 
-// Обработчик на Esc
+// Обработчик Esc закрытия
 
-const closeEscModal = (evt) => {
+const closePhotoHandler = (evt) => {
   if (isKeyEscape(evt)) {
     evt.preventDefault();
     closeModal();
   };
-}
+};
 
 // Добаление обработчика на открытие
 
@@ -69,17 +69,9 @@ const openModal = () => {
   modal.classList.remove('hidden');
   modalOpened.classList.add('modal-open');
 
-  document.addEventListener('keydown', closeEscModal);
+  document.addEventListener('keydown', closePhotoHandler);
+  document.addEventListener('click', closePhotoModalOverlay);
 }
-
-const openModalClickHandler = function () {
-  thumbnailsContainer.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    openModal();
-  });
-}
-
-openModalClickHandler();
 
 // Добавление обработчика на закрытие
 
@@ -87,18 +79,19 @@ const closeModal = () => {
   modal.classList.add('hidden');
   modalOpened.classList.remove('modal-open');
 
-  document.removeEventListener('keydown', closeEscModal);
+  document.removeEventListener('keydown', closePhotoHandler);
+  document.removeEventListener('click', closePhotoModalOverlay);
   commentsShown = 0;
 }
 
-const addModalClickHandler = function () {
+const closeModalClickHandler = () => {
   closeButton.addEventListener('click', (evt) => {
     evt.preventDefault();
     closeModal();
   });
 }
 
-addModalClickHandler();
+closeModalClickHandler();
 
 // Добавление данных для больших фото
 
@@ -115,4 +108,12 @@ commentsLoader.addEventListener('click', () => {
   renderComments();
 })
 
-export { addBigPhotoData };
+export { closeModal, openModal, addBigPhotoData };
+
+// Закрытие фото при клике вне модального окна
+
+const closePhotoModalOverlay = (evt) => {
+  if (evt.target === document.querySelector('.big-picture')) {
+    closeModal();
+  };
+};
