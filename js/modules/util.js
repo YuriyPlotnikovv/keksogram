@@ -1,7 +1,7 @@
 import { commentField, hashTagsField } from "./addFormValidation.js";
 
 const isFieldFocused = () =>
-document.activeElement === hashTagsField ||
+  document.activeElement === hashTagsField ||
   document.activeElement === commentField;
 
 export { isFieldFocused };
@@ -9,7 +9,7 @@ export { isFieldFocused };
 // Проверка нажатой клавиши
 
 const isKeyEscape = (evt) => {
-  return evt.key === 'Escape';
+  return evt.key === "Escape";
 };
 
 export { isKeyEscape };
@@ -17,9 +17,9 @@ export { isKeyEscape };
 const closeMessageHandler = (evt) => {
   if (isKeyEscape(evt)) {
     evt.preventDefault();
-    document.removeEventListener('keydown', closeMessageHandler);
-    document.querySelector('.status-message').remove();
-  };
+    document.removeEventListener("keydown", closeMessageHandler);
+    document.querySelector(".status-message").remove();
+  }
 };
 
 // Сообщение об ошибке загрузки данных с сервера
@@ -27,16 +27,16 @@ const closeMessageHandler = (evt) => {
 const ALERT_SHOW_TIME = 4000;
 
 const errorAlertMessage = (message) => {
-  const errorContainer = document.createElement('div');
-  errorContainer.style.position = 'absolute';
-  errorContainer.style.zIndex = '100';
-  errorContainer.style.top = '0';
-  errorContainer.style.left = '0';
-  errorContainer.style.right = '0';
-  errorContainer.style.padding = '20px';
-  errorContainer.style.fontSize = '30px';
-  errorContainer.style.textAlign = 'center';
-  errorContainer.style.background = 'purple';
+  const errorContainer = document.createElement("div");
+  errorContainer.style.position = "absolute";
+  errorContainer.style.zIndex = "100";
+  errorContainer.style.top = "0";
+  errorContainer.style.left = "0";
+  errorContainer.style.right = "0";
+  errorContainer.style.padding = "20px";
+  errorContainer.style.fontSize = "30px";
+  errorContainer.style.textAlign = "center";
+  errorContainer.style.background = "purple";
 
   errorContainer.textContent = message;
   document.body.append(errorContainer);
@@ -48,47 +48,62 @@ const errorAlertMessage = (message) => {
 
 export { errorAlertMessage };
 
+// Показ фильтров
+
+const imgFilters = document.querySelector(".img-filters");
+
+const showUsersFilters = () => {
+  imgFilters.classList.remove("img-filters--inactive");
+};
+export { showUsersFilters };
+
 // Закрытие сообщения при клике вне окна
 
 const closeUploadModalOverlay = (evt) => {
-  if (evt.target === document.querySelector('.status-message')) {
-    document.removeEventListener('keydown', closeMessageHandler);
-    document.removeEventListener('click', closeUploadModalOverlay);
-    document.querySelector('.status-message').remove();
-  };
+  if (evt.target === document.querySelector(".status-message")) {
+    document.removeEventListener("keydown", closeMessageHandler);
+    document.removeEventListener("click", closeUploadModalOverlay);
+    document.querySelector(".status-message").remove();
+  }
 };
 
 // Сообщения об отправке данных на сервер
 
-const successTemplate = document.querySelector('#success').content.querySelector('.success');
-const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+const successTemplate = document
+  .querySelector("#success")
+  .content.querySelector(".success");
+const errorTemplate = document
+  .querySelector("#error")
+  .content.querySelector(".error");
 const messageFragment = document.createDocumentFragment();
 
 const showErrorMessage = () => {
   const errorElement = errorTemplate.cloneNode(true);
-  errorElement.classList.add('status-message');
-  errorElement.querySelector('.error__button').addEventListener('click', () => {
-    document.removeEventListener('keydown', closeMessageHandler);
-    document.querySelector('.status-message').remove();
+  errorElement.classList.add("status-message");
+  errorElement.querySelector(".error__button").addEventListener("click", () => {
+    document.removeEventListener("keydown", closeMessageHandler);
+    document.querySelector(".status-message").remove();
   });
-  document.addEventListener('keydown', closeMessageHandler);
-  document.addEventListener('click', closeUploadModalOverlay);
+  document.addEventListener("keydown", closeMessageHandler);
+  document.addEventListener("click", closeUploadModalOverlay);
   messageFragment.appendChild(errorElement);
   document.body.append(messageFragment);
-}
+};
 
 const showSuccessMessage = () => {
   const successElement = successTemplate.cloneNode(true);
-  successElement.classList.add('status-message');
-  successElement.querySelector('.success__button').addEventListener('click', () => {
-    document.removeEventListener('keydown', closeMessageHandler);
-    document.querySelector('.status-message').remove();
-  });
-  document.addEventListener('keydown', closeMessageHandler);
-  document.addEventListener('click', closeUploadModalOverlay);
+  successElement.classList.add("status-message");
+  successElement
+    .querySelector(".success__button")
+    .addEventListener("click", () => {
+      document.removeEventListener("keydown", closeMessageHandler);
+      document.querySelector(".status-message").remove();
+    });
+  document.addEventListener("keydown", closeMessageHandler);
+  document.addEventListener("click", closeUploadModalOverlay);
   messageFragment.appendChild(successElement);
   document.body.append(messageFragment);
-}
+};
 
 export { showErrorMessage, showSuccessMessage };
 
