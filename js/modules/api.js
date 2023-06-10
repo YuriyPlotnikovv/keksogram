@@ -1,17 +1,17 @@
-import { addUsersPictures } from "./addUsersPictures.js";
-import { SOME_PEOPLE_COUNT } from "./data.js";
+import { addUsersPictures } from './addUsersPictures.js';
+import { SOME_PEOPLE_COUNT } from './data.js';
 import {
   errorAlertMessage,
   showErrorMessage,
   showSuccessMessage,
-  showUsersFilters,
-} from "./util.js";
-import { closeImgModal } from "./imgUploadModal.js";
+} from './addMessages.js';
+import { showUsersFilters } from './addPhotoFiltration.js';
+import { closeImgModal } from './imgUploadModal.js';
 
 // Получение данных изображений с сервера
 
 const getData = () => {
-  fetch("https://25.javascript.pages.academy/kekstagram/data")
+  fetch('https://25.javascript.pages.academy/kekstagram/data')
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -25,7 +25,7 @@ const getData = () => {
     })
     .catch(() => {
       errorAlertMessage(
-        "При загрузке данных произошла ошибка, попробуйте перезагрузить страницу"
+        'При загрузке данных произошла ошибка, попробуйте перезагрузить страницу'
       );
     });
 };
@@ -33,8 +33,8 @@ const getData = () => {
 getData();
 
 const sendData = (formData) => {
-  fetch("https://25.javascript.pages.academy/kekstagram", {
-    method: "POST",
+  fetch('https://25.javascript.pages.academy/kekstagram', {
+    method: 'POST',
     body: formData,
   }).then((response) => {
     if (response.ok) {

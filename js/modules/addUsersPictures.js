@@ -1,8 +1,10 @@
-import { addBigPhotoData, openModal } from "./addBigPhotoData.js";
-import { addThumbnailsData } from "./addThumbnailsData.js";
+import { addBigPhotoData, openModal } from './addBigPhotoData.js';
+import { addThumbnailsData } from './addThumbnailsData.js';
 
 const picturesContainer = document.querySelector('.pictures');
-const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const picturesTemplate = document
+  .querySelector('#picture')
+  .content.querySelector('.picture');
 const BigImageFragment = document.createDocumentFragment();
 
 // Добавление изображений на страницу
@@ -18,9 +20,9 @@ const addUsersPictures = (data) => {
       addBigPhotoData(url, comments, likes, description);
     });
     BigImageFragment.appendChild(pictureElement);
-  })
+  });
 
   picturesContainer.appendChild(BigImageFragment);
-}
+};
 
 export { addUsersPictures };

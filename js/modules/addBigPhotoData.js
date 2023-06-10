@@ -1,10 +1,9 @@
-import { isKeyEscape } from "./util.js";
+import { isKeyEscape } from './util.js';
 
 const modal = document.querySelector('.big-picture');
 const bigImage = modal.querySelector('.big-picture__img');
 const imageCapture = modal.querySelector('.social__header');
-const thumbnails = document.querySelectorAll('.picture');
-const closeButton = document.querySelector('.big-picture__cancel')
+const closeButton = document.querySelector('.big-picture__cancel');
 const modalOpened = document.querySelector('body');
 const commentsContainer = document.querySelector('.social__comments');
 const commentsLoader = document.querySelector('.social__comments-loader');
@@ -19,19 +18,18 @@ let commentsArray = [];
 const createComment = ({ avatar, name, message }) => {
   const comment = document.createElement('li');
   comment.classList.add('social__comment');
-  comment.innerHTML =
-  `<img class="social__picture"
-  src=""
-  alt=""
-  width="35" height="35">
-  <p class="social__text"></p>`;
+  comment.innerHTML = `<img class='social__picture'
+  src=''
+  alt=''
+  width='35' height='35'>
+  <p class='social__text'></p>`;
 
   comment.querySelector('.social__picture').src = avatar;
   comment.querySelector('.social__picture').alt = name;
   comment.querySelector('.social__text').textContent = message;
 
   return comment;
-}
+};
 
 const renderComments = () => {
   commentsShown += COMMENTS_QUANTITY;
@@ -47,12 +45,12 @@ const renderComments = () => {
   for (let i = 0; i < commentsShown; i++) {
     const commentElement = createComment(commentsArray[i]);
     fragment.append(commentElement);
-  };
+  }
 
   commentsContainer.innerHTML = '';
   commentsContainer.append(fragment);
-  commentsCounter.innerHTML = `${commentsShown} из <span class="comments-count">${commentsArray.length}</span> комментариев`;
-}
+  commentsCounter.innerHTML = `${commentsShown} из <span class='comments-count'>${commentsArray.length}</span> комментариев`;
+};
 
 // Обработчик Esc закрытия
 
@@ -60,7 +58,7 @@ const closePhotoHandler = (evt) => {
   if (isKeyEscape(evt)) {
     evt.preventDefault();
     closeModal();
-  };
+  }
 };
 
 // Добаление обработчика на открытие
@@ -71,7 +69,7 @@ const openModal = () => {
 
   document.addEventListener('keydown', closePhotoHandler);
   document.addEventListener('click', closePhotoModalOverlay);
-}
+};
 
 // Добавление обработчика на закрытие
 
@@ -82,14 +80,14 @@ const closeModal = () => {
   document.removeEventListener('keydown', closePhotoHandler);
   document.removeEventListener('click', closePhotoModalOverlay);
   commentsShown = 0;
-}
+};
 
 const closeModalClickHandler = () => {
   closeButton.addEventListener('click', (evt) => {
     evt.preventDefault();
     closeModal();
   });
-}
+};
 
 closeModalClickHandler();
 
@@ -101,12 +99,11 @@ const addBigPhotoData = (url, comments, likes, description) => {
   imageCapture.querySelector('.likes-count').textContent = likes;
   commentsArray = comments;
   renderComments();
-
-}
+};
 
 commentsLoader.addEventListener('click', () => {
   renderComments();
-})
+});
 
 export { closeModal, openModal, addBigPhotoData };
 
@@ -115,5 +112,5 @@ export { closeModal, openModal, addBigPhotoData };
 const closePhotoModalOverlay = (evt) => {
   if (evt.target === document.querySelector('.big-picture')) {
     closeModal();
-  };
+  }
 };

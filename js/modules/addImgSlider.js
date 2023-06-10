@@ -25,13 +25,13 @@ noUiSlider.create(sliderElement, {
       return value.toFixed(1);
     },
     from: function (value) {
-      return parseFloat(value)
+      return parseFloat(value);
     },
   },
 });
 
 sliderElement.setAttribute('disabled', true);
-sliderContainer.setAttribute('hidden', true)
+sliderContainer.setAttribute('hidden', true);
 
 // Обновление слайдера
 
@@ -45,28 +45,35 @@ const sliderUpdate = (min, max, start, step) => {
     step: step,
   });
   sliderElement.noUiSlider.set(start);
-}
+};
 
 // Обновление эффектов
 
-
-const effectUpdate = (effectNumber, min, max, start, step, effect, filter, ...symbol) => {
-
+const effectUpdate = (
+  effectNumber,
+  min,
+  max,
+  start,
+  step,
+  effect,
+  filter,
+  ...symbol
+) => {
   if (effectRadio[effectNumber].checked) {
     sliderElement.noUiSlider.on('update', () => {
       sliderValue.value = sliderElement.noUiSlider.get();
-      imgPreview[0].style.filter = filter + '(' + sliderValue.value + symbol + ')';
+      imgPreview[0].style.filter =
+        filter + '(' + sliderValue.value + symbol + ')';
     });
 
     sliderUpdate(min, max, start, step);
     sliderElement.noUiSlider.set(max);
     imgPreview[0].classList.add('effects__preview--' + effect);
-
   } else {
     imgPreview[0].style.filter = null;
     imgPreview[0].classList.remove('effects__preview--' + effect);
   }
-}
+};
 
 // Обновление всех параметров слайдера
 
@@ -81,12 +88,12 @@ effectList.addEventListener('change', () => {
     imgPreview[0].style.filter = null;
   } else {
     sliderElement.removeAttribute('disabled');
-    sliderContainer.removeAttribute('hidden')
-  };
+    sliderContainer.removeAttribute('hidden');
+  }
 
   effectUpdate(1, 0, 1, 1, 0.1, 'chrome', 'grayscale');
   effectUpdate(2, 0, 1, 1, 0.1, 'sepia', 'sepia');
   effectUpdate(3, 0, 100, 100, 1, 'marvin', 'invert', '%');
   effectUpdate(4, 0, 3, 3, 0.1, 'phobos', 'blur', 'px');
   effectUpdate(5, 1, 3, 3, 0.1, 'heat', 'brightness');
-})
+});

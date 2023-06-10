@@ -1,4 +1,4 @@
-import { sendData } from "./api.js";
+import { sendData } from './api.js';
 
 const formField = document.querySelector('.img-upload__form');
 const hashTagsField = document.querySelector('.text__hashtags');
@@ -16,14 +16,16 @@ const hasValidCountTags = (tags) => tags.length <= MAX_TAGS_COUNT;
 const hasUniqueTags = (tags) => {
   const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
   return lowerCaseTags.length === new Set(lowerCaseTags).size;
-}
+};
 
 const isValidTags = (value) => {
   const tags = value
     .trim()
     .split(' ')
     .filter((tag) => tag.trim().length);
-  return hasValidCountTags(tags) && hasUniqueTags(tags) && tags.every(hasValidTag);
+  return (
+    hasValidCountTags(tags) && hasUniqueTags(tags) && tags.every(hasValidTag)
+  );
 };
 
 // Добавление дополнительной проверки Pristine
@@ -45,8 +47,8 @@ const sendFormData = () => {
     if (isValidForm) {
       const formData = new FormData(evt.target);
       sendData(formData);
-    };
+    }
   });
 };
 
-sendFormData()
+sendFormData();

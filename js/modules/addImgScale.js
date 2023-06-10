@@ -7,14 +7,14 @@ const imagePreview = document.querySelector('.img-upload__preview').children;
 scaleSmaller.addEventListener('click', () => {
   if (parseInt(scaleValue.value) > 25) {
     const scaleCurrentValue = parseInt(scaleValue.value) - VALUE_STEP;
-    imagePreview[0].style.transform = 'scale(' + (scaleCurrentValue * 0.01) + ')';
+    imagePreview[0].style.transform = 'scale(' + scaleCurrentValue * 0.01 + ')';
     scaleValue.value = scaleCurrentValue + '%';
   }
-})
+});
 scaleBigger.addEventListener('click', () => {
   if (parseInt(scaleValue.value) < 100) {
     const scaleCurrentValue = parseInt(scaleValue.value) + VALUE_STEP;
-    imagePreview[0].style.transform = 'scale(' + (scaleCurrentValue * 0.01) + ')';
+    imagePreview[0].style.transform = 'scale(' + scaleCurrentValue * 0.01 + ')';
     scaleValue.value = scaleCurrentValue + '%';
   }
-})
+});

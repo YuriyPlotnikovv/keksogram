@@ -1,4 +1,4 @@
-import { isFieldFocused, isKeyEscape } from "./util.js";
+import { isFieldFocused, isKeyEscape } from './util.js';
 
 const body = document.querySelector('body');
 const fileField = document.querySelector('.img-upload__form');
@@ -10,12 +10,12 @@ const imgPreview = uploadModal.querySelector('.img-upload__preview').children;
 // Подмена изображения в превью
 
 const changeImgPreview = () => {
-  const fileReader = new FileReader()
-fileReader.onload = () => {
-  imgPreview[0].setAttribute('src', fileReader.result);
-}
+  const fileReader = new FileReader();
+  fileReader.onload = () => {
+    imgPreview[0].setAttribute('src', fileReader.result);
+  };
   fileReader.readAsDataURL(uploadButton.files[0]);
-}
+};
 
 //
 
@@ -23,7 +23,7 @@ const closeUploadHandler = (evt) => {
   if (isKeyEscape(evt) && !isFieldFocused()) {
     evt.preventDefault();
     closeImgModal();
-  };
+  }
 };
 
 // Добавление обработчика открытия окна
@@ -34,20 +34,20 @@ const openImgModal = () => {
 
   document.addEventListener('keydown', closeUploadHandler);
   document.addEventListener('click', closeUploadModalOverlay);
-}
+};
 
 const openImgClickHandler = () => {
   uploadButton.addEventListener('change', () => {
     changeImgPreview();
     openImgModal();
-  })
-}
+  });
+};
 
 openImgClickHandler();
 
 // Сброс слайдера
 
-const sliderContainer = document.querySelector('.effect-level')
+const sliderContainer = document.querySelector('.effect-level');
 const sliderElement = sliderContainer.querySelector('.effect-level__slider');
 
 const removeSlider = () => {
@@ -56,7 +56,7 @@ const removeSlider = () => {
   sliderContainer.setAttribute('hidden', true);
   imgPreview[0].removeAttribute('style');
   imgPreview[0].removeAttribute('class');
-}
+};
 
 // Добавление обработчика закрытия окна
 
@@ -68,14 +68,14 @@ const closeImgModal = () => {
 
   document.removeEventListener('keydown', closeUploadHandler);
   document.removeEventListener('click', closeUploadModalOverlay);
-}
+};
 
 const closeImgClickHandler = () => {
   closeImgModalButton.addEventListener('click', (evt) => {
     evt.preventDefault();
     closeImgModal();
-  })
-}
+  });
+};
 closeImgClickHandler();
 
 export { closeImgModal };
@@ -85,5 +85,5 @@ export { closeImgModal };
 const closeUploadModalOverlay = (evt) => {
   if (evt.target === document.querySelector('.img-upload__overlay')) {
     closeImgModal();
-  };
+  }
 };
