@@ -1,14 +1,13 @@
 import { addUsersPictures } from './addUsersPictures.js';
-import { SOME_PEOPLE_COUNT } from './data.js';
 import {
   errorAlertMessage,
   showErrorMessage,
   showSuccessMessage,
 } from './addMessages.js';
-import { showUsersFilters } from './addPhotoFiltration.js';
+import { addFilters, showUsersFilters } from './addPhotoFiltration.js';
 import { closeImgModal } from './imgUploadModal.js';
 
-// Получение данных изображений с сервера
+// Получение и отрисовка данных с сервера
 
 const getData = () => {
   fetch('https://25.javascript.pages.academy/kekstagram/data')
@@ -18,10 +17,9 @@ const getData = () => {
       }
     })
     .then((data) => {
-      addUsersPictures(data.slice(0, SOME_PEOPLE_COUNT));
-    })
-    .then(() => {
       showUsersFilters();
+      addUsersPictures(data);
+      addFilters(data);
     })
     .catch(() => {
       errorAlertMessage(
@@ -31,6 +29,8 @@ const getData = () => {
 };
 
 getData();
+
+// Отправка данных из формы на сервер
 
 const sendData = (formData) => {
   fetch('https://25.javascript.pages.academy/kekstagram', {

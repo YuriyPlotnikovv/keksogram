@@ -24,6 +24,19 @@ const closeMessageHandler = (evt) => {
   }
 };
 
+// Установка задержки отрисовки
+
+let timeoutId;
+const debounce = (callback, timeoutDelay) => {
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export { debounce };
+
+/*
 // Получение рандомного числа
 
 const getRandom = (min, max) => {
@@ -57,7 +70,9 @@ const someSet = (min, max, length) => {
   return set;
 };
 const someArray = Array.from(someSet(1, 25, 25));
-/*
+
+export { someArray };
+
 // Создание комментария
 
 const createComment = (index) => {
