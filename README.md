@@ -11,4 +11,4 @@
 ---
 Деплой проекта: https://joyful-crisp-07726d.netlify.app
 ---
-Третий учебный проект от HTML Academy
+Третий учебный проект в рамках курса Frontend-разработчик от HTML Academy
