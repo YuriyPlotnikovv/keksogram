@@ -24,6 +24,8 @@ const closeMessageHandler = (evt) => {
   }
 };
 
+export {closeMessageHandler}
+
 // Установка задержки отрисовки
 
 let timeoutId;

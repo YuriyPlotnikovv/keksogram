@@ -1,3 +1,4 @@
+import { closeMessageHandler } from './util.js';
 // Сообщение об ошибке загрузки данных с сервера
 
 const ALERT_SHOW_TIME = 4000;
