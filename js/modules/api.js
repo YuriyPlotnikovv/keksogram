@@ -10,7 +10,7 @@ import { closeImgModal } from './imgUploadModal.js';
 // Получение и отрисовка данных с сервера
 
 const getData = () => {
-  fetch('https://25.javascript.pages.academy/kekstagram/data')
+  fetch('https://25.javascript.htmlacademy.pro/kekstagram')
     .then((response) => {
       if (response.ok) {
         return response.json();
