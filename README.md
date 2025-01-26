@@ -9,6 +9,6 @@
 * попапы о статусах
 * сортировка изображений
 ---
-Деплой проекта: https://joyful-crisp-07726d.netlify.app
+Деплой проекта: https://kekstagram-training.netlify.app/
 ---
 Третий учебный проект в рамках курса Frontend-разработчик от HTML Academy
