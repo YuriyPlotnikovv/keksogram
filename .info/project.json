@@ -1,0 +1,56 @@
+{
+  "id": 2,
+  "title-ru": "Keksogram",
+  "title-en": "Keksogram",
+  "textFirst-ru": "Проект на JavaScript",
+  "textFirst-en": "Project on JavaScript",
+  "textSecond-ru": "Третий учебный проект, разработан в рамках курса Frontend-разработчик от HTML Academy. Проект на изучение возможностей JavaScript на практике.",
+  "textSecond-en": "The third training project was developed as part of the Frontend Developer course from the HTML Academy. A project to explore the possibilities of JavaScript in practice.",
+  "deploy": "https://keksogram-training.netlify.app/",
+  "features": [
+    {
+      "name-ru": "Страницы",
+      "name-en": "Pages",
+      "description-ru": [
+        "Главная",
+        "Модальное окно загрузки фотографий"
+      ],
+      "description-en": [
+        "Main",
+        "Photo Upload Modal"
+      ]
+    },
+    {
+      "name-ru": "Дополнительно",
+      "name-en": "Additional",
+      "description-ru": [
+        "Подключены валидатор и слайдер",
+        "Загрузка данных с сервера",
+        "Фильтры изображения",
+        "Сортировка отображения на сайте",
+        "Попап статуса загрузки",
+        "Динамическая подгрузка комментариев и данных фотографий"
+      ],
+      "description-en": [
+        "Validator and slider connected",
+        "public loading from server",
+        "Image filters",
+        "Sorting display on site",
+        "Upload status popup",
+        "Dynamic loading of comments and photo public"
+      ]
+    },
+    {
+      "name-ru": "Не реализовано",
+      "name-en": "Not Implemented",
+      "description-ru": [
+        "Добавление комментария к фотографиям",
+        "Отображение загруженного изображения на сайте"
+      ],
+      "description-en": [
+        "Adding comments to photos",
+        "Displaying uploaded image on the site"
+      ]
+    }
+  ]
+}
