@@ -9,6 +9,16 @@
   "deploy": "https://keksogram-training.netlify.app/",
   "features": [
     {
+      "name-ru": "Дата разработки",
+      "name-en": "Development date",
+      "description-ru": [
+        "Июнь 2023"
+      ],
+      "description-en": [
+        "June 2023"
+      ]
+    },
+    {
       "name-ru": "Страницы",
       "name-en": "Pages",
       "description-ru": [
@@ -51,6 +61,23 @@
         "Adding comments to photos",
         "Displaying uploaded image on the site"
       ]
+    }
+  ],
+  "technologies": [
+    {
+      "name": "HTML",
+      "icon": "icon-html",
+      "link": "https://html.spec.whatwg.org/multipage/"
+    },
+    {
+      "name": "CSS",
+      "icon": "icon-css",
+      "link": "https://www.w3.org/Style/CSS/"
+    },
+    {
+      "name": "JavaScript",
+      "icon": "icon-js",
+      "link": "https://ecma-international.org/publications-and-standards/standards/ecma-262/"
     }
   ]
 }
