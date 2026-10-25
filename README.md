@@ -1,4 +1,4 @@
-Учебный проект «Kekstagram»
+Учебный проект «Keksogram»
 ===========
 Проект на практику в JavaScript:
 * вёрстка была предоставлена учебным курсом
@@ -9,6 +9,6 @@
 * попапы о статусах
 * сортировка изображений
 ---
-Деплой проекта: https://kekstagram-training.netlify.app/
+Деплой проекта: https://keksogram-training.yp-projects.ru/
 ---
 Третий учебный проект в рамках курса Frontend-разработчик от HTML Academy
